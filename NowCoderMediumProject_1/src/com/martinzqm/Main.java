@@ -13,6 +13,8 @@ public class Main {
 
     public static void demoString() {
         String str = "hello nowcoder";
+        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
         print(1, str.indexOf('e'));
         print(2, str.charAt(6));
         print(3, str.codePointAt(1));
