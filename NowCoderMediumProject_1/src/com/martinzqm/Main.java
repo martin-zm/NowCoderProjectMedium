@@ -32,6 +32,8 @@ public class Main {
 
     public static  void demoList() {
         List<String> strList = new ArrayList<String>();
+        List<String> strList1 = new LinkedList<String>();
+        Vector<String> vector = new Vector<>();
         for (int i = 0; i < 4; i++) {
             strList.add(String.valueOf(i));
         }
@@ -159,6 +161,7 @@ public class Main {
         //demoKeyValue();
         //demoException();
         //demoCommon();
-        demoClass();
+        //demoClass();
+        System.out.println(" ".length());
     }
 }
