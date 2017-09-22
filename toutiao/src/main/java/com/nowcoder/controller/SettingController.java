@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 
 @Aspect
-//@Controller
+@Controller
 public class SettingController {
     @RequestMapping("/setting")
     @ResponseBody
