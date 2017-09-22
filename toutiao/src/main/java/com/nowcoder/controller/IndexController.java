@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * Created by Administrator on 2017/9/14 0014.
  */
-@Controller
+//@Controller
 public class IndexController {
     private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 

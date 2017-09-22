@@ -16,6 +16,7 @@ ${value1}<br>
 User:${user.name!"123"}<br>
 
 <#assign title = "nowcoder">
+
 include:<#include "header.ftl"><br>
 
 <#--宏定义-->
