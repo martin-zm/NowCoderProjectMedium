@@ -17,7 +17,7 @@ User:${user.name!"123"}<br>
 
 <#assign title = "nowcoder">
 
-include:<#include "header.ftl"><br>
+include:<#include "header1.ftl"><br>
 
 <#--宏定义-->
 <#macro render_color colors>

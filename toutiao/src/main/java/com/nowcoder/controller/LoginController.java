@@ -1,5 +1,8 @@
 package com.nowcoder.controller;
 
+import com.nowcoder.async.EventModel;
+import com.nowcoder.async.EventProducer;
+import com.nowcoder.async.EventType;
 import com.nowcoder.service.UserService;
 import com.nowcoder.util.ToutiaoUtil;
 import org.slf4j.Logger;
@@ -22,6 +25,9 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    EventProducer eventProducer;
 
     @RequestMapping(path = {"/reg"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
@@ -52,22 +58,27 @@ public class LoginController {
     @ResponseBody
     public String login(Model model, @RequestParam("username") String username,
                       @RequestParam("password") String password,
-                      @RequestParam(name = "rember", defaultValue = "0") int rememberme) {
+                      @RequestParam(name = "rember", defaultValue = "0") int rememberme,
+                        HttpServletResponse response) {
         try {
-            Map<String, Object> map = userService.register(username, password);
+            Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
                 Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
                 cookie.setPath("/");
                 if (rememberme > 0) {
                     cookie.setMaxAge(3600*24*5);
                 }
-                return ToutiaoUtil.getJSONString(0, "注册成功！");
+                response.addCookie(cookie);
+                eventProducer.fireEvent(new
+                        EventModel(EventType.LOGIN).setActorId((int) map.get("userId"))
+                        .setExts("username", "martinzqm").setExts("to", "martinzqm@163.com"));
+                return ToutiaoUtil.getJSONString(0, "成功");
             } else {
                 return ToutiaoUtil.getJSONString(1, map);
             }
         } catch (Exception e) {
-            logger.error("注册异常" + e.getMessage());
-            return ToutiaoUtil.getJSONString(1, "注册异常");
+            logger.error("登录异常" + e.getMessage());
+            return ToutiaoUtil.getJSONString(1, "登录异常");
         }
     }
 
