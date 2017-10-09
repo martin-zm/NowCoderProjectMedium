@@ -38,7 +38,5 @@ hworld2: ${hworld2}<br>
 
 ${colors?size}
 
-
-
 </body>
 </html>
